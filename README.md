@@ -20,7 +20,7 @@ This project allows for a specific device driver to be enabled/disabled dependin
     3. Go into the device driver's properties and then go into the `Details` tab.
     4. Select the `Device Instance Path` property from the property dropdown.
     5. Right click the obtained output and select copy.
-2. Open a Command Prompt/PowerShell window in the directory where `DevicePowerManagement.exe` is present in.
+2. Open a Command Prompt/PowerShell window as an Administrator in the directory where `DevicePowerManagement.exe` is present in.
 3. Use the following syntax:
     ```
     DevicePowerManagement.exe <Device Instance ID>
