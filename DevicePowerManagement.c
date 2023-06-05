@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <shlobj.h>
 #include <cfgmgr32.h>
 
 LRESULT WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -17,11 +18,19 @@ LRESULT WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             MessageBoxW(hWnd, L"Syntax: <Device Instance ID>", L"DevicePowerManagement", MB_ICONASTERISK);
             ExitProcess(0);
         }
+
+        if (!IsUserAnAdmin())
+        {
+            ShellExecuteW(hWnd, L"runas", cmdLineW[0], cmdLineW[1], L".", SW_SHOWNORMAL);
+            ExitProcess(0);
+        }
+
         if (CM_Locate_DevNodeW(&deviceInstance, (DEVINSTID_W)cmdLineW[1], CM_LOCATE_DEVINST_NORMAL))
         {
             MessageBoxW(hWnd, L"Error: Invalid Device Instance ID!", L"DevicePowerManagement", MB_ICONERROR);
-            ExitProcess(0);
+            ExitProcess(1);
         }
+
         RegisterPowerSettingNotification(hWnd, &GUID_ACDC_POWER_SOURCE, DEVICE_NOTIFY_WINDOW_HANDLE);
         SendMessageW(hWnd, WM_POWERBROADCAST, PBT_APMPOWERSTATUSCHANGE, 0);
         return 0;
