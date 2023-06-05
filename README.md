@@ -3,7 +3,7 @@ Enable/Disable a specific device driver depending on AC adapter status.
 
 ## Aim
 This project allows for a specific device driver to be enabled/disabled depending on the AC adapter status.
-- This table shows when a device driver will be enabled/disabled.  
+- This table shows when a device driver will be enabled/disabled.<br>  
     |AC Adapter Status|Device Driver Status|
     |-|-|
     |Plugged|Enabled|
